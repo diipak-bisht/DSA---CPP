@@ -34,6 +34,7 @@ class Graph {
 
 class WeightedGraph {
     int vertices;
+    int total_edges = 0;
     std::vector<std::list<std::pair<int, int>>> edges;
 
     public:
@@ -44,6 +45,7 @@ class WeightedGraph {
 
     void add_edge(int u, int v, int weight) {
         edges[u].push_back(std::make_pair(v, weight));
+        total_edges++;
     }
 
     void print_graph() {
@@ -56,6 +58,10 @@ class WeightedGraph {
             std::cout<<std::endl;
             i++;
         }
+    }
+
+    int get_total_edges() {
+        return this->total_edges;
     }
 
     auto get_edges() {
