@@ -13,6 +13,10 @@ class Graph {
 
     void addEdge(int u, int v) {
         _vertices[u].push_back(v);
+        // Maintain vertices
+        if (u >= n) {
+            n = u;
+        }
     }
 
     void printGraph() {
@@ -46,10 +50,13 @@ class WeightedGraph {
     void add_edge(int u, int v, int weight) {
         edges[u].push_back(std::make_pair(v, weight));
         total_edges++;
+        if (u >= vertices) {
+            vertices = u;
+        }
     }
 
     void print_graph() {
-        int i = 1;
+        int i = 0;
         while(i <= vertices) {
             std::cout << i;
             for(auto v : edges[i]) {
@@ -58,6 +65,10 @@ class WeightedGraph {
             std::cout<<std::endl;
             i++;
         }
+    }
+
+    void update_adjacency_list(int src, std::list<std::pair<int, int>> adj_list) {
+        edges[src] = adj_list;
     }
 
     int get_total_edges() {
