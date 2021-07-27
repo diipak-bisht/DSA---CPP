@@ -3,6 +3,7 @@
 
 class Graph {
     int n;
+    bool undirected = false;
     std::vector<std::list<int>> _vertices;
 
     public:
@@ -11,8 +12,17 @@ class Graph {
         _vertices.resize(n+1);
     }
 
+    Graph(int vertices, bool undirected) {
+        n = vertices;
+        this->undirected = undirected;
+        _vertices.resize(n+1);
+    }
+
     void addEdge(int u, int v) {
         _vertices[u].push_back(v);
+        if(this->undirected) {
+            _vertices[v].push_back(u);
+        }
         // Maintain vertices
         if (u >= n) {
             n = u;
@@ -20,7 +30,7 @@ class Graph {
     }
 
     void printGraph() {
-        int i = 1;
+        int i = 0;
         while(i <= n) {
             std::cout << i;
             for(auto v : _vertices[i]) {
